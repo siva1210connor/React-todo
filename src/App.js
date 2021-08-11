@@ -21,6 +21,7 @@ class App extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }
+  //handle items
   handleInput(e) {
     this.setState({
       currentItem: {
@@ -29,6 +30,7 @@ class App extends React.Component {
       },
     });
   }
+  //add items
   addItem(e) {
     e.preventDefault();
     const newItem = this.state.currentItem;
@@ -44,6 +46,7 @@ class App extends React.Component {
       });
     }
   }
+  //delete items
   deleteItem(key) {
     const filteredItems = this.state.items.filter((item) => item.key !== key);
     this.setState({
