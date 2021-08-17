@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Todo from "./Todo";
-
+import "./Form.css";
 
 function Form(props) {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
   const [sort, setSort] = useState("{oldest}");
   const [sortedTodos, setSortedTodos] = useState([]);
+  const history = useHistory();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    history.replace("/");
+  };
 
   const handleSort = (e) => {
     setSort(e.target.value);
@@ -33,7 +40,7 @@ function Form(props) {
 
   return (
     <div className="form">
-      <h1>Today's Task</h1>
+      <h2>Today's Task</h2>
       <div className="todo-form">
         <input
           type="text"
@@ -45,19 +52,19 @@ function Form(props) {
         <button className="add-btn" onClick={addTodo}>
           Add
         </button>
+        <select value={sort} onChange={handleSort}>
+          <option value="{oldest}">Oldest</option>
+          <option value="{latest}">Latest</option>
+        </select>
       </div>
-
-      <hr />
-      <select value={sort} onChange={handleSort}>
-        <option value="{oldest}">Oldest</option>
-        <option value="{latest}">Latest</option>
-      </select>
-      <hr />
       <div className="todos">
         {sortedTodos.map((todo, index) => (
           <Todo key={index} todo={todo} id={index} />
         ))}
       </div>
+      <button className="logout button" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }
