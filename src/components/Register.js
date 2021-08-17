@@ -4,8 +4,7 @@ import "./Register.css";
 
 function Register() {
   const history = useHistory();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     history.replace("/form");
   };
   return (
@@ -24,7 +23,7 @@ function Register() {
           <label>Password</label>
           <input type="password" name="password" placeholder="password" />
         </div>
-        <button className="Sign-up button" onClick={handleSubmit}>
+        <button className="Sign-up button" type="button" onClick={handleSubmit}>
           Sign In
         </button>
       </form>

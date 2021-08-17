@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function useAuth(initialValue) {
-  const [isAuth, setIsAuth] = useState(initialValue);
+export default function useAuth() {
+  const [isAuth, setIsAuth] = useState();
 
   function login() {
     setTimeout(() => {

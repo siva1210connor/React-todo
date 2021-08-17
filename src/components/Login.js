@@ -3,12 +3,10 @@ import { useHistory } from "react-router-dom";
 
 function Login() {
   const history = useHistory();
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     history.replace("/form");
   };
-  const regClick = (e) => {
-    e.preventDefault();
+  const regClick = () => {
     history.replace("/signup");
   };
   return (
@@ -24,10 +22,10 @@ function Login() {
           <input type="password" name="password" placeholder="password" />
         </div>
         <div className="buttons">
-          <button className="button" onClick={handleClick}>
+          <button className="button" type="button" onClick={handleClick}>
             Login
           </button>
-          <button className="button" onClick={regClick}>
+          <button className="button" type="button" onClick={regClick}>
             Sign Up
           </button>
         </div>
