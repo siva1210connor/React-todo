@@ -1,0 +1,12 @@
+.container {
+  margin: 6rem auto;
+  border: 2px solid black;
+  max-width: 30rem;
+}
+.container h1,
+h2 {
+  text-align: center;
+}
+.container .ui-message {
+  text-align: center;
+}
