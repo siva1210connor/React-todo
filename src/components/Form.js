@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Todo from "./Todo";
 import "./Form.css";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 function Form(props) {
   const [todos, setTodos] = useState([]);
@@ -9,9 +11,14 @@ function Form(props) {
   const [sort, setSort] = useState("{oldest}");
   const [sortedTodos, setSortedTodos] = useState([]);
   const history = useHistory();
+  const user = useContext(UserContext);
+  let username = '';
+  let storedTodos = []
 
   const handleLogout = (e) => {
     e.preventDefault();
+    user.logout();
+    sessionStorage.removeItem('currentLoggedIn')
     history.replace("/");
   };
 
@@ -21,8 +28,16 @@ function Form(props) {
 
   const addTodo = () => {
     if (input) {
-      setTodos([...todos, input]);
-      setInput("");
+      username = JSON.parse(sessionStorage.getItem('currentLoggedIn')).username;
+      if(localStorage.getItem( username + '_todos')){
+        storedTodos = JSON.parse(localStorage.getItem( username + "_todos"))
+      }
+      let newTodo = {label: input};
+      storedTodos.push(newTodo)
+      localStorage.setItem( username + "_todos", JSON.stringify(storedTodos))
+      setTodos([...todos, newTodo]);
+      
+      setInput("")
     } else {
       alert("Input field cannot be empty");
     }
@@ -31,8 +46,16 @@ function Form(props) {
   useEffect(() => {
     const stored = sort === "{oldest}" ? [...todos] : [...todos].reverse();
     setSortedTodos(stored);
-    console.log(stored);
+    console.log(stored)
   }, [sort, todos]);
+
+  useEffect (() => {
+    username = JSON.parse(sessionStorage.getItem('currentLoggedIn')).username;
+    if(localStorage.getItem( username + '_todos')){
+      setTodos(JSON.parse(localStorage.getItem( username + '_todos')))
+      setSortedTodos(JSON.parse(localStorage.getItem( username + '_todos')))
+    }
+  },[])
 
   const handleChange = (e) => {
     setInput(e.target.value);

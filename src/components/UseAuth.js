@@ -4,14 +4,10 @@ export default function useAuth() {
   const [isAuth, setIsAuth] = useState();
 
   function login() {
-    setTimeout(() => {
-      setIsAuth(true);
-    }, 1000);
+    setIsAuth(true);
   }
   function logout() {
-    setTimeout(() => {
-      setIsAuth(false);
-    }, 1000);
+    setIsAuth(false);
   }
 
   return [isAuth, login, logout];

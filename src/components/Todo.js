@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Todo.css"
+import "./Todo.css";
 
 function Todo(props) {
   const todo = props.todo;
@@ -17,7 +17,7 @@ function Todo(props) {
         checked={checked}
         onChange={() => setChecked(checked === "" ? "checked" : "")}
       />
-      <label htmlFor={props.id}>{todo}</label>
+      <label htmlFor={props.id}>{todo.label}</label>
     </div>
   );
 }
